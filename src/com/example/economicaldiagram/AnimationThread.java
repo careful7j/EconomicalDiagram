@@ -34,9 +34,7 @@ class AnimationThread extends Thread {
 	/** Controller that animates ButtonPanel and handles all the touch events */
 	protected ButtonPanelController buttonPanelController = new ButtonPanelController();
 	/** Timeout between surfaces to redraw. 34ms is equal to 29 frames per second */
-    final int FRAMES_TIMEOUT = 34;	    
-    /** Default custom UI element sizes acting before real are fetched from XML */
-    final int DEFAULT_SIZE = 100;
+	private final int FRAMES_TIMEOUT = 34;	    
     /** If custom UI elements already are initialized */    	
 	protected boolean isInitialized = false;
 	
@@ -80,8 +78,8 @@ class AnimationThread extends Thread {
         _run = run;
     }    
     
-    @Override
     /** Animates Custom UI elements */
+    @Override
     public void run() {
         Canvas diagramCanvas;
         Canvas animButtonCanvas;

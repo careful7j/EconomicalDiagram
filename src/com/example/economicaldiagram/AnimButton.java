@@ -64,8 +64,8 @@ class AnimButton extends SurfaceView implements SurfaceHolder.Callback{
     public void surfaceDestroyed(SurfaceHolder holder) {
     }
     
-    @Override
     /** Initializes the button with it's actual sizes */
+    @Override    
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		width = MeasureSpec.getSize(widthMeasureSpec);
@@ -73,8 +73,8 @@ class AnimButton extends SurfaceView implements SurfaceHolder.Callback{
 	    animationThread.animButtonController.reInitialize( this, height, width );
 	}
     
-    @Override
     /** Passes all the touches to animButtonController to handle it */
+    @Override    
     public boolean onTouchEvent(MotionEvent event) {        
         animationThread.animButtonController.getTouch( event );
         return true;

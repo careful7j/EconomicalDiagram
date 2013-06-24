@@ -108,6 +108,7 @@ public class AnimButtonController implements IControllerUI {
         											source.getHeight(),
         											matrix, false);
     }
+    
     @Override
     public void reInitialize(	SurfaceView animButton,
 									int surfaceHeight,
@@ -127,6 +128,7 @@ public class AnimButtonController implements IControllerUI {
         xText = (int) ( surfaceWidth * WAVE_ACTIVE_ZONE_SIZE );
         eventXold = surfaceWidth / 2;
 	}
+    
     @Override
     public void animate( Canvas canvas ) {
     	canvas.drawBitmap( animButtonBackground, 0, 0, null);

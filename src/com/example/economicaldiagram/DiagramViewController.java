@@ -32,39 +32,39 @@ public class DiagramViewController implements IControllerUI {
 	/** Background stretched to diagramView size */
 	protected Bitmap diagramBackground;
     /** Maximum number of percents */
-    final int PERCENTS = 100;
+    final private int PERCENTS = 100;
     /** Number of degrees in circle */
-    final int DEGREES_IN_CIRCLE = 360;
+    final private int DEGREES_IN_CIRCLE = 360;
     /** Number of degrees in one radian */
-    final float RADIAN = 57.29f;
+    final private float RADIAN = 57.29f;
     
     /** Default size of the DiagramView. Used before actual are received */
-    final int DEFAULT_SIZE = 100;
+    final private int DEFAULT_SIZE = 100;
     /** Scale of diagram. 1.00f is equal to size of diagramView */
-    final float DIAGRAM_SCALE = 0.8f;
+    final private float DIAGRAM_SCALE = 0.8f;
     /** Shift of Y center down in percents from diagramView size. 0,5f - middle of View */
-    final float DIAGRAM_SHIFT_DOWN = 0.55f;
+    final private float DIAGRAM_SHIFT_DOWN = 0.55f;
     /** Number of corners in circle */
-    final int NMBR_CORNERS = 300;      
+    final private int NMBR_CORNERS = 300;      
     
     /** UI element X size */
-    int surfaceWidth = DEFAULT_SIZE;
+    private int surfaceWidth = DEFAULT_SIZE;
     /** UI element Y size */
-    int surfaceHeight = DEFAULT_SIZE;    
+    private int surfaceHeight = DEFAULT_SIZE;    
     /** Diagram center X axis */
-    float center_X = surfaceWidth / 2;
+    private float center_X = surfaceWidth / 2;
     /** Diagram center Y axis */
-    float center_Y = (float) ( DIAGRAM_SHIFT_DOWN * surfaceHeight);
+    private float center_Y = (float) ( DIAGRAM_SHIFT_DOWN * surfaceHeight);
     /** Diagram radius */
-    float radius = 170;  
+    private float radius = 170;  
     /** Axis X id */
-    final int AXIS_X = 0;
+    final private int AXIS_X = 0;
     /** Axis Y id */
-	final int AXIS_Y = 1;
+	final private int AXIS_Y = 1;
 	/** Points to build one button X axis */
-    float[] xPoints = { 0 };
+	private float[] xPoints = { 0 };
     /** Points to build one button Y axis */
-    float[] yPoints = { 0 };
+	private float[] yPoints = { 0 };
  
     /** Paint used to draw custom UI element */
     private Paint paint = new Paint();
@@ -78,112 +78,110 @@ public class DiagramViewController implements IControllerUI {
      * When user pulls a sector out from diagram touches are not handled any more.
      */
     protected boolean toHandle = true;
-    /** User's finger touches the screen */
-	boolean touched = false;
 	/** X of previous point user touched */
-    float eventXold = Short.MAX_VALUE;
+    private float eventXold = Short.MAX_VALUE;
     /** Y of previous point user touched */
-    float eventYold = Short.MAX_VALUE;
+    private float eventYold = Short.MAX_VALUE;
     /** X of point user touches now */ 
-	float eventXnew = Short.MAX_VALUE;
+    private float eventXnew = Short.MAX_VALUE;
 	/** Y of point user touches now */ 
-	float eventYnew = Short.MAX_VALUE;
+    private float eventYnew = Short.MAX_VALUE;
     /** The speed with which the user rotates the diagram */
-    float motionSpeed = 0;
+    private float motionSpeed = 0;
     
 	/** Id direction to nowhere */
-    final int DIR_NONE = 0;
+    final private int DIR_NONE = 0;
     /** Id direction to the left */
-    final int DIR_LEFT = 2;
+    final private int DIR_LEFT = 2;
     /** Id direction to the right */
-    final int DIR_RIGHT = 3;
+    final private int DIR_RIGHT = 3;
     /** Id direction up */
-    final int DIR_UP = 4;
+    final private int DIR_UP = 4;
     /** Id direction down */
-    final int DIR_DOWN = 5;
+    final private int DIR_DOWN = 5;
     
     /** Id Rotation direction clockwise */
-    final int DIR_FWD = -1;
+    final private int DIR_FWD = -1;
     /** Id Rotation direction counterclockwise */
-    final int DIR_REV = 1;	  
+    final private int DIR_REV = 1;	  
     /** Current rotation direction */
-    int direction = DIR_NONE;
+    private int direction = DIR_NONE;
     
 	/** Sectors coordinates including twist angles are computed. */
-	boolean sectorsComputed = false;
+    private boolean sectorsComputed = false;
 	/** Current twist of diagram in points which circle is based on (not angles) */ 
-	int currentRotation = 0;
+    private int currentRotation = 0;
 	
 	/** Mode when sector is pulled out from diagram. If false mode is rotation. */
-	boolean modeMove = false;
+    private boolean modeMove = false;
 	/** Diagram sector that user touches now */
-	int activeSectorId = 0;
+    private int activeSectorId = 0;
 	/** The speed with which the user moves the sector */
-	float activeSectorMotionSpeed = 0;
+    private float activeSectorMotionSpeed = 0;
 	/** How far the active sector is pulled out by user */
-	float activeSectorShift = 0;
+    private float activeSectorShift = 0;
 	/** How far from radius sector need to be pulled to disappear */
-	final float ACTIVE_SECTOR_ZONE_SIZE = 0.75f;
+	final private float ACTIVE_SECTOR_ZONE_SIZE = 0.75f;
 	/**
 	 * How far the finger need to be moved to the right to sector
 	 * stop rotating and start pulling out. Switches to mode move.
 	 */
-	final float SECTOR_ACTIVATION_DISTANCE = 10;
+	final private float SECTOR_ACTIVATION_DISTANCE = 10;
 	/** Current finger shift to the right */
-	float sectorActivationShift = 0;
+	private float sectorActivationShift = 0;
 	
 	/** Left top corner X of sector minimizing animation */
-	float animLeft = 0;
+	private float animLeft = 0;
 	/** Right bottom corner X of sector minimizing animation */
-	float animRight = 0;
+	private float animRight = 0;
 	/** Left top corner Y of sector minimizing animation */
-	float animTop = 0;
+	private float animTop = 0;
 	/** Right bottom corner Y of sector minimizing animation */
-	float animBot = 0;
+	private float animBot = 0;
 	/** Current frame number of sector minimizing animation */
-	int animateAltTabStage = 10;
+	protected int animateAltTabStage = 10;
 	/** If the sector minimizing animation is played now */
-	boolean animateAltTab = false;
+	protected boolean animateAltTab = false;
 	
 	/** X points of help animation polygon */
-	float[] helpX;
+	private float[] helpX;
 	/** Y points of help animation polygon */
-	float[] helpY;
+	private float[] helpY;
 	/** Current position of help animation polygon. Changes from 0 to HELP_PER_SHIFT_LIMIT */
-	float currentHelpShift = 0;
+	private float currentHelpShift = 0;
 	/** Speed of help animation pixels per frame */
-	float HELP_SHIFT_PER_FRAME = 2.0f;
+	private float HELP_SHIFT_PER_FRAME = 2.0f;
 	/** Help animation restarts when this value is reached by currentHelpShift */
-	float HELP_PER_FRAME_SHIFT_LIMIT = 75f;
+	private float HELP_PER_FRAME_SHIFT_LIMIT = 75f;
 	/** Number of points in help animation polygon */
-	final int HELP_CORNERS = 6;		
+	private final int HELP_CORNERS = 6;		
 	/** Animation polygon's middle points shift */
-	final int HELP_CORNER_SHIFT = 32;
+	private final int HELP_CORNER_SHIFT = 32;
 	/** Width of animation polygon */
-	final int HELP_WIDTH = 8;
+	private final int HELP_WIDTH = 8;
 	/** Help animation start point X offset from center X plus radius */
-	final int HELP_LEFT_CORRECTION = -24;
+	private final int HELP_LEFT_CORRECTION = -24;
 	
 	/** Decreasing change of Alpha channel per frame for sectors' titles */
-	final int LABEL_REV = -3;
+	final private int LABEL_REV = -3;
 	/** Increasing change of Alpha channel per frame for sectors' titles */
-	final int LABEL_FWD = 3;
+	final private int LABEL_FWD = 3;
 	/** Font size of sectors' titles */
-	final int LABEL_TEXT_SIZE = 14;
+	final private int LABEL_TEXT_SIZE = 14;
 	/** Maximal alpha value of sectors' titles */
-	final int LABEL_COLOR_MAX = 220;
+	final private int LABEL_COLOR_MAX = 220;
 	/** Minimal alpha value of sectors' titles */
-	final int LABEL_COLOR_MIN = 90;
+	final private int LABEL_COLOR_MIN = 90;
 	/** 
 	 * Sector titles left shift.
 	 * Used to prevent sectors' titles moving out from diagramView at right */
-	final int LABEL_LEFT_SHIFT = -100;
+	final private int LABEL_LEFT_SHIFT = -100;
 	/** Current value of alpha channel for sectors' titles */
-	int labelTransparency = LABEL_COLOR_MIN;
+	private int labelTransparency = LABEL_COLOR_MIN;
 	/** Direction of sectors' titles alpha channel change */
-	int labelChangeDirection = LABEL_FWD;
+	private int labelChangeDirection = LABEL_FWD;
 	/** Current sectors' title left shift. Values are: LABEL_LEFT_SHIFT or 0 */
-	int labelCurrentLeftShift = 0;
+	private int labelCurrentLeftShift = 0;
 	
 	/** Diagram header font size */
 	private final int DIAGRAM_HEADER_TEXT_SIZE = 17;
@@ -209,32 +207,32 @@ public class DiagramViewController implements IControllerUI {
 		    }};;
     
     /** Stack where sectors already pulled out from diagram are placed */
-	Stack<Integer> diagramSectorsStack = new Stack<Integer>();
+	protected Stack<Integer> diagramSectorsStack = new Stack<Integer>();
 	
 	/** UI signal */
-	static final int EXPORT_2012 = 1;	
+	static public final int EXPORT_2012 = 1;	
 	/** UI signal */
-	static final int EXPORT_2010 = 2;
+	static public final int EXPORT_2010 = 2;
 	/** UI signal */
-	static final int EXPORT_2007 = 3;
+	static public final int EXPORT_2007 = 3;
 	/** UI signal */
-	static final int EXPORT_2004 = 4;
+	static public final int EXPORT_2004 = 4;
 	/** UI signal */
-	static final int EXPORT_2000 = 5;
+	static public final int EXPORT_2000 = 5;
 	/** UI signal */
-	static final int IMPORT_2012 = -1;
+	static public final int IMPORT_2012 = -1;
 	/** UI signal */
-	static final int IMPORT_2010 = -2;
+	static public final int IMPORT_2010 = -2;
 	/** UI signal */
-	static final int IMPORT_2007 = -3;
+	static public final int IMPORT_2007 = -3;
 	/** UI signal */
-	static final int IMPORT_2004 = -4;
+	static public final int IMPORT_2004 = -4;
 	/** UI signal */
-	static final int IMPORT_2000 = -5;
+	static public final int IMPORT_2000 = -5;
 	
 	/** Map that compares UI signals with year data identifiers */
 	@SuppressLint("UseSparseArrays")
-	final HashMap < Integer, String > diagramDataNames = 
+	protected final HashMap < Integer, String > diagramDataNames = 
 			new HashMap < Integer, String >(){
 			private static final long serialVersionUID = 1327940003343370401L;
 
@@ -252,30 +250,30 @@ public class DiagramViewController implements IControllerUI {
 		    }};;
     		    
 	/** Current sectors' sizes based on diagram is built now */
-	HashMap< String, Double > categories = 
+	protected HashMap< String, Double > categories = 
 			Info.getAllData().get( "IMPORT_2012" );
 	/** Current sectors names */
-	String[] categoryNames =
+	protected String[] categoryNames =
 			categories.keySet().toArray(
 			new String[categories.size()] );	
 	
 	/** Sectors start points X axis */
-	float[] sectorXfirst = new float[ categories.size() ];
+	private float[] sectorXfirst = new float[ categories.size() ];
 	/** Sectors start points Y axis */
-	float[] sectorYfirst = new float[ categories.size() ];
+	private float[] sectorYfirst = new float[ categories.size() ];
 	/** Sectors end points X axis */
-	float[] sectorXlast = new float[ categories.size() ];
+	private float[] sectorXlast = new float[ categories.size() ];
 	/** Sectors end points Y axis */
-	float[] sectorYlast = new float[ categories.size() ];	
+	private float[] sectorYlast = new float[ categories.size() ];	
 	/** Invisible sectors that user has already pulled out from diagram */
-	boolean[] invisibleSectors = new boolean[ categories.size() ];	
+	protected boolean[] invisibleSectors = new boolean[ categories.size() ];	
 	
 	/** Red channel of diagram sectors' colors */
-	final int[] R = Info.R;
+	final private int[] R = Info.R;
 	/** Green channel of diagram sectors' colors */
-	final int[] G = Info.G;
+	final private int[] G = Info.G;
 	/** Blue channel of diagram sectors' colors */
-	final int[] B = Info.B;	
+	final private int[] B = Info.B;	
 	
     /** Sets up diagram's background */
     private void setBackground() {
@@ -507,7 +505,6 @@ public class DiagramViewController implements IControllerUI {
            }
         
         if (event.getAction() == MotionEvent.ACTION_UP) {        
-        	touched = false;
         	modeMove = false;
         	toHandle = true;       	
         	activeSectorShift = 0;
@@ -515,7 +512,6 @@ public class DiagramViewController implements IControllerUI {
         	sectorActivationShift = 0;
            }
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-        	touched = true;
         	eventXold = (int) event.getX();
         	eventYold = (int) event.getY();
         }   
@@ -560,14 +556,14 @@ public class DiagramViewController implements IControllerUI {
     	if ( eventX > ( radius / 2 + ( surfaceWidth / 2 ) ) ) {
     		if ( moveDirV == DIR_UP ) direction = DIR_REV;
     		if ( moveDirV == DIR_DOWN ) direction = DIR_FWD;
-    	}
-    	
+    	} int i =2 ; int j = 3;
+    	 int x = i & j;
     	//=== inner part of the circle ===   
     	if (	( eventX >= center_X - radius / 2 ) &&
     			( eventX <= center_X ) &&
     			( eventY >= center_Y - radius / 2 ) &&
     			( eventY <= center_Y + radius / 2 )
-    		)
+    		) 
     			{
     				if ( moveDirV == DIR_UP ) direction = DIR_FWD;
     				if ( moveDirV == DIR_DOWN ) direction = DIR_REV;

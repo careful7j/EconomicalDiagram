@@ -19,9 +19,7 @@ import android.view.SurfaceView;
 public class ButtonPanelController implements IControllerUI {
 	
 	/** Reference to controlled UI element */
-	AnimationThread animationThread;
-	/** Diagram that is controlled by this ButtonPanel */
-	DiagramView diagramView;
+	protected AnimationThread animationThread;
 	/** Default sizes of the ButtonPanel. Used before actual are received */
     final private int DEFAULT_SIZE = 100;
     /** UI element X size */
@@ -33,17 +31,17 @@ public class ButtonPanelController implements IControllerUI {
     /** Axis Y id */
 	final private int AXIS_Y = 1;
     /** Points to build one button X axis */
-    float[] xPoints = { 0 };
+	private float[] xPoints = { 0 };
     /** Points to build one button Y axis */
-    float[] yPoints = { 0 };
+	private float[] yPoints = { 0 };
     /** Points to build one arrow X axis */
-    float[] xArrows = { 0 };
+	private float[] xArrows = { 0 };
     /** Points to build one arrow Y axis */
-    float[] yArrows = { 0 };
+	private float[] yArrows = { 0 };
     /** Points to build Russian Federation flag X axis */
-    float[] xFlag = { 0 };
+	private float[] xFlag = { 0 };
     /** Points to build Russian Federation flag Y axis */
-    float[] yFlag = { 0 };	
+	private float[] yFlag = { 0 };	
 	
 	/** Number of parts in ButtonPanel */
 	final private int PARTS_IN_PANEL = 8;
@@ -58,7 +56,7 @@ public class ButtonPanelController implements IControllerUI {
 	/** Value to multiply years to get import information */
 	private int DIRECTION_IMPORT = -1;
 	/** Year selected now*/
-	int highlightedYear = DiagramViewController.IMPORT_2012;
+	private int highlightedYear = DiagramViewController.IMPORT_2012;
 	/** Direction selected now */
 	protected int highlightedDirection = DIRECTION_IMPORT;
 	/** Font size of buttons' titles */
@@ -96,7 +94,7 @@ public class ButtonPanelController implements IControllerUI {
 	private int buttonPanelPartSize = 10;
 	
 	/** X of point user touches now */ 
-	float eventXnew = Short.MAX_VALUE;	
+	private float eventXnew = Short.MAX_VALUE;	
     /** Paint used to draw custom UI element */
     private Paint paint = new Paint();
     /** Array of points to build polygon */

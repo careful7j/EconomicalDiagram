@@ -19,7 +19,7 @@ import android.view.SurfaceView;
 class ButtonPanel extends SurfaceView implements SurfaceHolder.Callback{
 	
 	/** Thread that animates this ButtonPanel */
-    AnimationThread animationThread;
+    private AnimationThread animationThread;
     /** ButtonPanel Y size */
     protected int height;
     /** ButtonPanel X size */
@@ -58,9 +58,9 @@ class ButtonPanel extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
     }
-    
-    @Override
+
     /** Initializes the button panel with it's actual sizes */
+    @Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		width = MeasureSpec.getSize(widthMeasureSpec);
@@ -68,8 +68,8 @@ class ButtonPanel extends SurfaceView implements SurfaceHolder.Callback{
 	    animationThread.buttonPanelController.reInitialize( this, height, width );
 	}
     
-    @Override
     /** Passes all the touches to buttonPanelController to handle it */
+    @Override    
     public boolean onTouchEvent(MotionEvent event) {        
         animationThread.buttonPanelController.getTouch( event );
         return true;

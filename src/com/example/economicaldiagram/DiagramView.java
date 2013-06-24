@@ -22,7 +22,7 @@ import android.view.SurfaceView;
 class DiagramView extends SurfaceView implements SurfaceHolder.Callback{
 	
 	/** Thread that animates this DiagramView */
-    AnimationThread animationThread;
+	private AnimationThread animationThread;
     /** Diagram Y size */
     protected int height;
     /** Diagram X size */
@@ -55,8 +55,8 @@ class DiagramView extends SurfaceView implements SurfaceHolder.Callback{
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
     }
  
-    @Override
     /** Restarts animation when application is restored from hidden state */
+    @Override
     public void surfaceCreated(SurfaceHolder holder) {
     	//============Saving state========================================
     	AnimButton animButton = animationThread.animButton;
@@ -79,8 +79,8 @@ class DiagramView extends SurfaceView implements SurfaceHolder.Callback{
     	animationThread.start();
     }
  
-    @Override
     /** Joins the animation thread when diagram surface is destroyed */
+    @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
         animationThread.setRunning(false);
@@ -92,8 +92,8 @@ class DiagramView extends SurfaceView implements SurfaceHolder.Callback{
         }
     }
     
-    @Override
     /** Initializes the diagramView with it's actual sizes */
+    @Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		width = MeasureSpec.getSize(widthMeasureSpec);
@@ -101,8 +101,8 @@ class DiagramView extends SurfaceView implements SurfaceHolder.Callback{
 	    animationThread.diagramController.reInitialize( this, height, width );
 	}
     
-    @Override
     /** Passes all the touches to diagramViewController to handle it */
+    @Override
     public boolean onTouchEvent(MotionEvent event) {        
         animationThread.diagramController.getTouch( event );
         return true;
