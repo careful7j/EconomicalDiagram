@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EconomicalDiagam</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <!-- TEXTS -->
+    <string name="potyanite_sektor">"[ Потяните сектор диаграммы сюда ]"</string>
+    <!-- CONTENT DESCRIPTIONS -->
+    <string name="c1">Gazprom logo</string>
+    <string name="c2">RosNeft logo</string>
+    <string name="c3">TransNeft logo</string>
+    <string name="c4">Lukoil logo</string>
+    <string name="c5">TatNeft logo</string>
+    <string name="c6">RusAL logo</string>
+    <string name="c7">Severstal logo</string>
+    <string name="c8">Norilsk Nickel logo</string>
+    <string name="c9">RosTelekom logo</string>
+    <string name="c10">MegaFon logo</string>
+    <string name="c11">SberBank logo</string>
+    <string name="c12">VTB Bank logo</string>
+
+</resources>
