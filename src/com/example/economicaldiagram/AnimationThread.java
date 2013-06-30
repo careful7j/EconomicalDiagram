@@ -88,33 +88,41 @@ class AnimationThread extends Thread {
             diagramCanvas = null;
             animButtonCanvas = null;
             buttonPanelCanvas = null;
+            
             try {
+            	checkInitialization();
                 diagramCanvas = diagramSurfaceHolder.lockCanvas(null); 
-                animButtonCanvas = animButtonSurfaceHolder.lockCanvas(null);
-                buttonPanelCanvas = buttonPanelSurfaceHolder.lockCanvas(null);
-                checkInitialization();
-                // possibly not the best solution but this runs just fine
                 synchronized ( diagramSurfaceHolder ) {                	
                 	diagramController.animate( diagramCanvas );
-                    synchronized ( animButtonSurfaceHolder ) {
-                       	animButtonController.animate( animButtonCanvas );
-                        synchronized ( buttonPanelSurfaceHolder ) {
-                           	buttonPanelController.animate( buttonPanelCanvas );
-                        }
-                    }
                 }
             } finally {
                 if ( diagramCanvas != null ) {
                 	diagramSurfaceHolder.unlockCanvasAndPost( diagramCanvas );
+                }                
+            }    
+            try {
+            	animButtonCanvas =  animButtonSurfaceHolder.lockCanvas(null);
+                synchronized ( animButtonSurfaceHolder ) {
+                   	animButtonController.animate( animButtonCanvas );
                 }
-                if ( animButtonCanvas != null ) {
+            	
+            } finally {
+            	if ( animButtonCanvas != null ) {
                 	animButtonSurfaceHolder.unlockCanvasAndPost( animButtonCanvas );
                 }
+            }
+            
+            try {
+                buttonPanelCanvas = buttonPanelSurfaceHolder.lockCanvas(null);
+                synchronized ( buttonPanelSurfaceHolder ) {
+                   	buttonPanelController.animate( buttonPanelCanvas );
+                }
+            } finally {
                 if ( buttonPanelCanvas != null ) {
                 	buttonPanelSurfaceHolder.unlockCanvasAndPost( buttonPanelCanvas );
                 }
             }
-        standBy( FRAMES_TIMEOUT );            
+            standBy( FRAMES_TIMEOUT ); 
         }
     }   
     
